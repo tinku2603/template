@@ -127,16 +127,16 @@ const Drawer = DrawerNavigator(
     NHLayout: { screen: NHLayout },
     NHList: { screen: NHList },
     ListSwipe: { screen: ListSwipe },
-    NHRadio: { screen: NHRadio },
-    NHSearchbar: { screen: NHSearchbar },
-    NHSpinner: { screen: NHSpinner },
-    NHPicker: { screen: NHPicker },
+   NHRadio: { screen: NHRadio },
+   NHSearchbar: { screen: NHSearchbar },
+   NHSpinner: { screen: NHSpinner },
+   NHPicker: { screen: NHPicker },
     NHTab: { screen: NHTab },
     NHThumbnail: { screen: NHThumbnail },
-    NHTypography: { screen: NHTypography },
+   NHTypography: { screen: NHTypography },
     Segment: { screen: Segment },
-    Toast: { screen: Toast },
-    Actionsheet: { screen: Actionsheet }
+   Toast: { screen: Toast },
+   Actionsheet: { screen: Actionsheet }
   },
   {
     initialRouteName: "Home",

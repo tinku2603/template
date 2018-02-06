@@ -76,7 +76,7 @@ const datas = [
     //types: "5"
   }
   
-  
+  /*
   ,
   
   
@@ -238,7 +238,7 @@ const datas = [
     icon: "paper",
     bg: "#48525D"
   }
-  
+  */
 ];
 
 class SideBar extends Component {

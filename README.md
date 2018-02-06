@@ -44,3 +44,12 @@ Navigation Linking
     icon: "keypad",
     bg: "#B89EF5"
     
+
+Pending:
+
+About page api
+change view to private in all tabs
+Timetable
+Database table update for Fee
+ECA linking
+Add Contact with footer
