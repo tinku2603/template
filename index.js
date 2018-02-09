@@ -1,6 +1,6 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
-import Setup from "./src/boot/setup";
+//import Setup from "./src/boot/setup";
 import Main from "./src/login/index";
 
-AppRegistry.registerComponent('template', () => Main);
+AppRegistry.registerComponent('template', () => App);

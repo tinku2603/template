@@ -19,7 +19,7 @@ import { ActivityIndicator} from 'react-native';
 import fetchurl from "../../login/fetchurl";
 import {AsyncStorage,Alert} from 'react-native';
 
-const sankhadeep = require("../../../assets/contacts/sankhadeep.png");
+const sankhadeep = require("../../../assets/contacts/supriya.png");
 const supriya = require("../../../assets/contacts/supriya.png");
 const himanshu = require("../../../assets/contacts/himanshu.png");
 const shweta = require("../../../assets/contacts/shweta.png");
@@ -30,7 +30,7 @@ class NHListThumbnail extends Component {
   constructor(props){
     super(props);
     this.state = {
-        gists : []
+        staffs : []
     }
 }
 
@@ -62,7 +62,7 @@ fetch('http://'+fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {
         return res.json();      // or `res.text();` 
       })
       .then((obj)=>{
-                    this.setState({ gists:obj.payload });  
+                    this.setState({ staffs:obj.payload });  
                     console.log("Response object is: ", obj);
                     //console.log(obj.payload.name);
                     //var content=obj.payload;
@@ -97,20 +97,20 @@ fetch('http://'+fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {
 
         <Content>
           <List>
-             { this.state.gists.map(gist =>(
-              <ListItem key={gist.id} >
+             { this.state.staffs.map(staff =>(
+              <ListItem thumbnail key={staff.id} >
                 <Left>
-                  <Thumbnail square size={55}/>
+                <Thumbnail square size={55} />
                 </Left>
                 <Body >
                   <Text >
-                    {gist.name}
+                    {staff.name}
                   </Text>
                   <Text note >
-                    {gist.designation}
+                    {staff.designation}
                   </Text>
                   <Text note >
-                    {gist.contact_number}
+                    {staff.contact_number}
                   </Text>
                 </Body>
               </ListItem>

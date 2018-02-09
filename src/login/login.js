@@ -19,7 +19,7 @@ import {
 import {AsyncStorage} from 'react-native';
 import styles from "./flstyles";
 //import fetch from "fetch";
-import { MKTextField, MKColor, MKButton } from 'react-native-material-kit';
+//import { MKTextField, MKColor, MKButton } from 'react-native-material-kit';
 import fetchurl from "./fetchurl";
 import App from "../App"
 

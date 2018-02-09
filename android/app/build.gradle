@@ -98,6 +98,11 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
+        manifestPlaceholders = [
+                pushbots_app_id: "5a1c4c9d9b823a30058b456c",
+                google_sender_id: "529441145906",
+                pushbots_loglevel: "DEBUG"
+                ]
         applicationId "com.template"
         minSdkVersion 16
         targetSdkVersion 22
@@ -137,8 +142,9 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-material-kit')
+    compile project(':pushbots-react-native')
+   // compile project(':react-native-vector-icons')
+    //compile project(':react-native-material-kit')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules

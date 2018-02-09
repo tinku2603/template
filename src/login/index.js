@@ -40,7 +40,7 @@ export default class Main extends Component {
               console.log(this.state.auth_token);
               AsyncStorage.getItem("expiry").then((value) => this.setState({ "expiry":value}));
               console.log("mounted");
-             if(value!=null) this.setState({isLoggedIn:true});
+            // if(value!=null) this.setState({isLoggedIn:true});
 
             }
 
