@@ -1,0 +1,31 @@
+
+API docs link for pushbots
+
+Push to all
+
+https://developer.pushbots.com/api/v2/#/Devices/pushBatch
+
+
+To Send SendSMS
+
+http://37.48.104.204/api/mt/SendSMS?user=schooltest&amp;password=9160708
+764&amp;senderid=AMEENB&amp;channel=Trans&amp;DCS=0&amp;flashsms=0&amp;number=91989xxxxx
+xx&amp;text=test message&amp;route=1
+
+
+1. Fee tab , 
+    We need 1.Total Fee
+            2.Last payment made
+            3.Last payment date
+            4.Remaining Balance
+2. fetech url for single person view
+        /api/students/self/view?ctx=self
+        /api/self/view?ctx=institute
+        simialrly for timetable,exam syllabus,books,staff
+        images url in fectch results
+        
+1. Self institute details: /api/self/view?ctx=institute
+2. Any student details: /api/students/view?ctx=student&username={{abc1}}
+3. All books of particular class: /api/books/view?ctx=class&val={{CLASSID}}
+4. Timetable of particular class: /api/timetable/view?ctx=class&val={{CLASSID}}
+/api/fees/view?ctx=student&val={{STUDENT_ID}}&dateStart={{10-01-2018}}&dateEnd={{22-01-2018}}

@@ -68,7 +68,7 @@ class Login extends Component {
                    //const { username, password } = this.state;
                     this.setState({message: '', isLogginIn: true,token:null});
                     var proceed = null;
-                    fetch('http://'+fetchurl.CLIENT_API, {  
+                    fetch(fetchurl.CLIENT_API, {  
                             method: 'POST',
                           //method: 'GET', /api/students/view?id=all
                             headers: {

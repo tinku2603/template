@@ -45,7 +45,7 @@ class SegmentNB extends Component {
         _loadInitialState = async () => {   
           var value= await AsyncStorage.getItem("auth_token");
           console.log(value);
-          fetch('http://'+fetchurl.CLIENT_API+'/api/books/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
+          fetch('http://'+fetchurl.CLIENT_API+'/api/books/view?ctx=class&val=all', { method: 'GET',headers: {'auth_token':value} })
           .then((res)=>{return res.json();})
           .then((obj)=>{
                         this.setState({ books:obj.payload });  

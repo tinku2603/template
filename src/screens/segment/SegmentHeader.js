@@ -27,11 +27,12 @@ class SegmentNB extends Component {
       
       students:[],
       fees:[],
-      seg: 1
+      seg: 1,
+      id:""
     };
   };
 
-  onValueChange(value: string) {
+  onValueChange(value:string) {
     this.setState({
       selected1: value
     });
@@ -42,19 +43,42 @@ class SegmentNB extends Component {
         _loadInitialState = async () => {   
           var value= await AsyncStorage.getItem("auth_token");
           console.log(value);
-          fetch('http://'+fetchurl.CLIENT_API+'/api/students/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
+      
+          /*
+          fetch('http://'+fetchurl.CLIENT_API+'/api/students/view?ctx=student&username=abc1', { method: 'GET',headers: {'auth_token':value} })
           .then((res)=>{return res.json();})
           .then((obj)=>{
-                        this.setState({ students:obj.payload });  
+                        this.setState({students:obj });
+                        this.setState({id:obj.id});  
+                      // console.log(this.state.students);
+                        console.log("Response object is: ", obj);
+                       // console.log(this.state.students.id);
+                       // console.log('id:',this.state.id);
+          })
+          //var url = 'http://'+fetchurl.CLIENT_API+'/api/fees/view?ctx=student&val='+this.state.students.id+'&dateStart=01-01-2018&dateEnd=25-02-2018';
+          //console.log(url);
+          //const id={this.state.students.id};
+          console.log(this.state.id);
+          fetch('http://'+fetchurl.CLIENT_API+'/api/fees/view?ctx=student&val=${id}&dateStart=01-01-2018&dateEnd=25-02-2018', { method: 'GET',headers: {'auth_token':value} })
+          .then((res)=>{return res.json();})
+          .then((obj)=>{
+                    console.log(this.state.students.id);
+                        this.setState({fees:obj });  
                         console.log("Response object is: ", obj);
           })
 
-          fetch('http://'+fetchurl.CLIENT_API+'/api/fees/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
-          .then((res)=>{return res.json();})
-          .then((obj)=>{
-                        this.setState({fees:obj.payload });  
-                        console.log("Response object is: ", obj);
-          })
+          */
+          const students= await fetch(fetchurl.CLIENT_API+'/api/students/view?ctx=student&username=abc1', { method: 'GET',headers: {'auth_token':value} });
+          const student= await response.json();
+          console.log(student);
+          //console.log(json.id);
+          const fees=await fetch(fetchurl.CLIENT_API+'/api/fees/view?ctx=student&val='+json.id+'&dateStart=01-01-2018&dateEnd=25-02-2018', { method: 'GET',headers: {'auth_token':value} })
+          const fee=await fees.json();
+          console.log(fee);
+
+          const classes=await fetch (fetchurl.CLIENT_API+'/api/class/view?ctx=id&val=2', { method: 'GET',headers: {'auth_token':value} });
+          const totalfee=await respnonse3.json();
+          console.log(totalfee);
   }
   render() {
     return (
@@ -94,8 +118,7 @@ class SegmentNB extends Component {
         <Content padder>
           {this.state.seg === 1 && 
           <List>
-           { this.state.students.map(student =>(
-            <ListItem key={student.id}>
+            <ListItem key>
               <Body  >
                 <Text >
                   Student Name:{student.name}
@@ -104,7 +127,7 @@ class SegmentNB extends Component {
                   Roll Number:{student.roll_no}
                 </Text>
                 <Text >
-                  Date Of Birth:{student.dob}
+                  Date Of Birth:{studnet.dob}
                 </Text>
                 <Text >
                   Guardian Name:{student.guardian_name}
@@ -118,7 +141,7 @@ class SegmentNB extends Component {
                 
               </Body>
               </ListItem>
-            ) )}
+            
         </List>
         //<Text>Puppies Selected</Text>
           }
@@ -128,16 +151,16 @@ class SegmentNB extends Component {
           //<Text>Will be updated soon !!!!!</Text>}
          
           <List>
-           { this.state.fees.map(fee =>(
+           
             
              
            
-            <ListItem key={fee.id}>
+            <ListItem >
            
               <Body  >
                 
                 <Text >
-                 Total Fee : {fee.amount}
+                 Total Fee : {}
                 </Text>
                 <Text >
                 Last Paid :
@@ -156,7 +179,7 @@ class SegmentNB extends Component {
                 
               </Body>
               </ListItem>
-             ))}
+            
         </List>
       }
         </Content>

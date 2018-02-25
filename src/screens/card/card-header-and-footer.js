@@ -21,7 +21,7 @@ class NHCardHeaderAndFooter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books:[],
+      institute:[],
       timetable:[],
       seg: 2
     };
@@ -32,15 +32,14 @@ class NHCardHeaderAndFooter extends Component {
         _loadInitialState = async () => {   
           var value= await AsyncStorage.getItem("auth_token");
           console.log(value);
-          fetch('http://'+fetchurl.CLIENT_API+'/api/instititues/view?ctx=all', { 
-          method: 'GET',
-          headers: {
-            'auth_token':value
-          } })
+          fetch('http://'+fetchurl.CLIENT_API+'/api/self/view?ctx=institute', {method: 'GET',headers: {'auth_token':value } 
+          })
           .then((res)=>{return res.json();})
           .then((abt)=>{
-                        this.setState({ books:abt.payload });  
+                        this.setState({ history:abt.history });
+                        this.setState({vision:abt.vision_statement});  
                         console.log("Response object is: ", abt);
+                       // console.log(this.state.institute);
           })
         }
 
@@ -54,40 +53,27 @@ class NHCardHeaderAndFooter extends Component {
             <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon name="arrow-back" />
             </Button>
+
           </Left>
           <Body>
             <Title>About Us</Title>
           </Body>
           <Right />
         </Header>
-
-        <Content padder>
+        <Content padder >
+        
           <Card style={styles.mb}>
             <CardItem header>
-              <Text>Misson</Text>
+              <Text>Vision</Text>
             </CardItem>
             <CardItem>
               <Body>
                 <Text>
-                  NativeBase is a free and open source framework that enable
-                  developers to build high-quality mobile apps using React
-                  Native iOS and Android apps with a fusion of ES6.
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>
-                  NativeBase builds a layer on top of React Native that provides
-                  you with basic set of components for mobile application
-                  development.
+                  {this.state.vision_statement}
                 </Text>
               </Body>
             </CardItem>
             
-            <CardItem footer>
-              <Text>GeekyAnts</Text>
-            </CardItem>
           </Card>
           <Card style={styles.mb}>
             <CardItem header>
@@ -96,27 +82,15 @@ class NHCardHeaderAndFooter extends Component {
             <CardItem>
               <Body>
                 <Text>
-                  NativeBase is a free and open source framework that enable
-                  developers to build high-quality mobile apps using React
-                  Native iOS and Android apps with a fusion of ES6.
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>
-                  NativeBase builds a layer on top of React Native that provides
-                  you with basic set of components for mobile application
-                  development.
+                  {this.state.history}
                 </Text>
               </Body>
             </CardItem>
             
-            <CardItem footer>
-              <Text>GeekyAnts</Text>
-            </CardItem>
           </Card>
+        
         </Content>
+        
       </Container>
     );
   }
