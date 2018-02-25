@@ -29,13 +29,14 @@ class SegmentNB extends Component {
       results: {
         items: []
       },
-      books:[],
-      timetables:[],
+      bookinfo:[],
+      timetableinfo:[],
+      sudentsinfo:'',
       seg: 2
     };
   };
   
-  onValueChange(value: string) {
+  onValueChange(value:string) {
     this.setState({
       selected1: value
     });
@@ -44,28 +45,23 @@ class SegmentNB extends Component {
 
         _loadInitialState = async () => {   
           var value= await AsyncStorage.getItem("auth_token");
+          var username=await AsyncStorage.getItem("username");
           console.log(value);
-          fetch('http://'+fetchurl.CLIENT_API+'/api/books/view?ctx=class&val=all', { method: 'GET',headers: {'auth_token':value} })
-          .then((res)=>{return res.json();})
-          .then((obj)=>{
-                        this.setState({ books:obj.payload });  
-                        console.log("Response object is: ", obj);
-          })
+         
+          const students= await fetch(fetchurl.CLIENT_API+'/api/students/view?ctx=student&username='+username, { method: 'GET',headers: {'auth_token':value} });
+          const student= await students.json();
+          console.log(student);
+          this.setState({studentinfo:student});
 
-          fetch('http://'+fetchurl.CLIENT_API+'/api/timetable/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
-          .then((res)=>{return res.json();})
-          .then((obj)=>{
-                        this.setState({ timetables:obj.payload });  
-                        console.log("Response object is: ", obj);
-          })
-/*
-          fetch('http://'+fetchurl.CLIENT_API+'/api/books/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
-          .then((res)=>{return res.json();})
-          .then((obj)=>{
-                        this.setState({ books:obj.payload });  
-                        console.log("Response object is: ", obj);
-                  })
-     */     
+          const books= await fetch(fetchurl.CLIENT_API+'/api/books/view?ctx=class&val='+student.class_id, { method: 'GET',headers: {'auth_token':value} });
+          const book= await books.json();
+          console.log(book);
+          this.setState({bookinfo:book.payload})
+          //console.log(json.id);
+          const timetables=await fetch(fetchurl.CLIENT_API+'/api/timetable/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
+          const timetable=await timetables.json();
+          console.log(timetable);
+          this.setState({timetableinfo:timetable.payload})
 
         }
       
@@ -111,15 +107,13 @@ class SegmentNB extends Component {
         <Content padder>
           {this.state.seg === 1 && 
           <List>
-           { this.state.books.map(book =>(
+         { this.state.bookinfo.map(book =>(
             <ListItem key={book.id}>
               <Body  >
                 <Text >
                   {book.name}
                 </Text>
-                <Text note >
-                  {book.subject_id}
-                </Text>
+                
               </Body>
               </ListItem>
             ) )}
@@ -128,7 +122,7 @@ class SegmentNB extends Component {
           }
           {this.state.seg === 2 && 
           <List>
-           { this.state.timetables.map(timetable =>(
+           { this.state.timetableinfo.map(timetable =>(
               
           
             <ListItem key={timetable.id}>

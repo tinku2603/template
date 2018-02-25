@@ -64,67 +64,37 @@ class Login extends Component {
  //   AsyncStorage.getItem("auth_token").then((value) => this.setState({ "auth_token":value}));
  //   console.log("mounted");
  // }
-        userLogin=()=> {
+        userLogin= async() => {
                    //const { username, password } = this.state;
                     this.setState({message: '', isLogginIn: true,token:null});
                     var proceed = null;
-                    fetch(fetchurl.CLIENT_API, {  
-                            method: 'POST',
-                          //method: 'GET', /api/students/view?id=all
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                                //'auth_token':'0d3ab785154d22f6d3f721d7839dd4363e0aeaf65034f319ff4d78f6a1197bfc',
-                            },
-                            body: JSON.stringify({
-                                username: this.state.username,
-                                plain_text_password: this.state.password,
-                            })
-                          })
-                          .then((res) =>{
-                            console.log("Is OK? ", res.ok);
-                            console.log("Status Code: ", res.status);
-                            console.log(res);
-                           if(res.ok) {
-                              this.props.onLoginPress();
-                            };
-                            return res.json();      // or `res.text();` 
+                    
+                  const login=await  fetch(fetchurl.CLIENT_API, {  
+                        method: 'POST',
+                        headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                        body: JSON.stringify({username: this.state.username,plain_text_password: this.state.password,})
+                      })
+                      .then((res) =>{
+                          if(res.ok) {this.props.onLoginPress();};
+                          return res.json();      // or `res.text();` 
                           })
                           .then((obj)=>{
                                         console.log("Response object is: ", obj);
-                                        
-                                        
                                           AsyncStorage.setItem("auth_token", obj.auth_token);
                                           AsyncStorage.setItem("expiry", obj.expires_at);
-                                          
-                                         // AsyncStorage.getItem("auth_token").then((value) => this.setState({ token:value}));//const value = await AsyncStorage.getItem("auth_token");
-                                          //this.setState({token:value});
-                                          //console.log(this.state.token);
+                                          AsyncStorage.setItem("username",obj.username);
+
+                                         
                                       
-                                          console.log("i have added");
-                                        
-                                        
-                                        
-                                        
+                                          console.log("i have added",obj.username);            
                           })
-                          /* .then((response) => response.json())
-                          .then((response) => {
-                              if (response.ok) {
-                                proceed=true,
-                                console.log("proceed=true");
-                              }
-                              else this.setState({ message: response.message });
-                          })
-                          .then(() => {
-                              this.setState({ isLoggingIn: false })
-                              console.log(proceed)
-                              if (proceed) this.props.onLoginPress();
-                          })
-                          */
                           .catch(err => {
                               this.setState({ message: err.message });
                               this.setState({ isLoggingIn: false })
                           });
+
+                  
+
           }               
           
           clearUsername = () => {

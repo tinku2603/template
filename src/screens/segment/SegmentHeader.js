@@ -13,6 +13,7 @@ import {
   List,
   ListItem,
   Body,
+  H1,H2,
   Segment
 } from "native-base";
 import styles from "./styles";
@@ -25,10 +26,14 @@ class SegmentNB extends Component {
     super(props);
     this.state = {
       
-      students:[],
-      fees:[],
+      
+      fees:'',
       seg: 1,
-      id:""
+      id:"",
+      studentinfo:'',
+      student:'',
+      classinfo:'',
+      
     };
   };
 
@@ -42,7 +47,9 @@ class SegmentNB extends Component {
 
         _loadInitialState = async () => {   
           var value= await AsyncStorage.getItem("auth_token");
+          var username=await AsyncStorage.getItem("username");
           console.log(value);
+          console.log(username);
       
           /*
           fetch('http://'+fetchurl.CLIENT_API+'/api/students/view?ctx=student&username=abc1', { method: 'GET',headers: {'auth_token':value} })
@@ -68,17 +75,20 @@ class SegmentNB extends Component {
           })
 
           */
-          const students= await fetch(fetchurl.CLIENT_API+'/api/students/view?ctx=student&username=abc1', { method: 'GET',headers: {'auth_token':value} });
-          const student= await response.json();
+          const students= await fetch(fetchurl.CLIENT_API+'/api/students/view?ctx=student&username='+username, { method: 'GET',headers: {'auth_token':value} });
+          const student= await students.json();
           console.log(student);
+          this.setState({studentinfo:student});
           //console.log(json.id);
-          const fees=await fetch(fetchurl.CLIENT_API+'/api/fees/view?ctx=student&val='+json.id+'&dateStart=01-01-2018&dateEnd=25-02-2018', { method: 'GET',headers: {'auth_token':value} })
+          const fees=await fetch(fetchurl.CLIENT_API+'/api/fees/view?ctx=student&val='+student.id+'&dateStart=01-01-2018&dateEnd=28-02-2018', { method: 'GET',headers: {'auth_token':value} })
           const fee=await fees.json();
           console.log(fee);
+          this.setState({feeinfo:fee.payload});
 
-          const classes=await fetch (fetchurl.CLIENT_API+'/api/class/view?ctx=id&val=2', { method: 'GET',headers: {'auth_token':value} });
-          const totalfee=await respnonse3.json();
-          console.log(totalfee);
+          const classes=await fetch (fetchurl.CLIENT_API+'/api/class/view?ctx=id&val='+student.class_id, { method: 'GET',headers: {'auth_token':value} });
+          const classdata=await classes.json();
+          console.log(classdata);
+          this.setState({classinfo:classdata});
   }
   render() {
     return (
@@ -118,30 +128,46 @@ class SegmentNB extends Component {
         <Content padder>
           {this.state.seg === 1 && 
           <List>
-            <ListItem key>
-              <Body  >
+           
+            <ListItem >
+              
                 <Text >
-                  Student Name:{student.name}
+                  Student Name:{this.state.studentinfo.name}
                 </Text>
+            </ListItem>
+            <ListItem>
                 <Text >
-                  Roll Number:{student.roll_no}
+                  Roll Number:{this.state.studentinfo.roll_no}
                 </Text>
+                </ListItem>
+            <ListItem>
                 <Text >
-                  Date Of Birth:{studnet.dob}
+                  Date Of Birth:{this.state.studentinfo.dob}
                 </Text>
+                </ListItem>
+            <ListItem>
                 <Text >
-                  Guardian Name:{student.guardian_name}
+                  Guardian Name:{this.state.studentinfo.guardian_name}
                 </Text>
+                </ListItem>
+            <ListItem>
                 <Text >
-                  Contact Number:{student.contact_number}
+                  Contact Number:{this.state.studentinfo.contact_number}
                 </Text>
-                <Text note>
-                  App Username:{student.username}
+                </ListItem>
+
+            <ListItem>
+              <Text >
+                  Class:{this.state.classinfo.name}
                 </Text>
-                
-              </Body>
+              
               </ListItem>
-            
+              <ListItem>
+                <Text note>
+                  App Username:{this.state.studentinfo.username}
+                </Text>
+                </ListItem>            
+        
         </List>
         //<Text>Puppies Selected</Text>
           }
@@ -151,36 +177,46 @@ class SegmentNB extends Component {
           //<Text>Will be updated soon !!!!!</Text>}
          
           <List>
-           
+           <ListItem>
+           <Text >
+                <H1> Total Fee : {this.state.classinfo.fee}</H1>
+                </Text>
+            </ListItem>
             
-             
+           { this.state.feeinfo.map(fee =>(   
            
-            <ListItem >
+            <ListItem key={fee.id}>
            
               <Body  >
                 
+               
                 <Text >
-                 Total Fee : {}
-                </Text>
-                <Text >
-                Last Paid :
+                 Paid :{fee.amount}
                 </Text>
                 
                 <Text >
-                Last Payment date :
+                Remarks :{fee.notes}
                 </Text>
-                <Text >
-                Total Paid :
-                </Text>
-                <Text >
-                Balance Fee :
-                </Text>
+               
 
                 
               </Body>
               </ListItem>
-            
+           ))}
+
+           <ListItem>
+           <Text >
+               <H2> Total Paid :</H2>
+                </Text>
+                
+            </ListItem>
+            <ListItem>
+            <Text >
+               <H2> Balance Fee :</H2>
+                </Text>
+              </ListItem>
         </List>
+
       }
         </Content>
       </Container>

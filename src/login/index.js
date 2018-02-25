@@ -35,12 +35,13 @@ export default class Main extends Component {
 
             _loadInitialState = async () => {   
               var value= await AsyncStorage.getItem("auth_token");
-              console.log(value);
+              var username=await AsyncStorage.getItem("username");
+              console.log(username);
               this.setState({auth_token:value});
               console.log(this.state.auth_token);
               AsyncStorage.getItem("expiry").then((value) => this.setState({ "expiry":value}));
-              console.log("mounted");
-             //if(value!=null) this.setState({isLoggedIn:true});
+             // console.log("mounted");
+             if(value!=null) this.setState({isLoggedIn:true});
 
             }
 

@@ -35,7 +35,7 @@ class Basic extends Component {
         _loadInitialState = async () => {   
           var value= await AsyncStorage.getItem("auth_token");
           console.log(value);
-          fetch('http://'+fetchurl.CLIENT_API+'/api/notices/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
+          fetch(fetchurl.CLIENT_API+'/api/notices/view?ctx=all', { method: 'GET',headers: {'auth_token':value} })
           .then((res)=>{return res.json();})
           .then((obj)=>{
                         this.setState({ notices:obj.payload });  
