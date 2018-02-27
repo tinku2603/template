@@ -32,14 +32,15 @@ class NHCardHeaderAndFooter extends Component {
         _loadInitialState = async () => {   
           var value= await AsyncStorage.getItem("auth_token");
           console.log(value);
-          fetch('http://'+fetchurl.CLIENT_API+'/api/self/view?ctx=institute', {method: 'GET',headers: {'auth_token':value } 
+          fetch(fetchurl.CLIENT_API+'/api/self/view?ctx=institute', {method: 'GET',headers: {'auth_token':value } 
           })
           .then((res)=>{return res.json();})
           .then((abt)=>{
                         this.setState({ history:abt.history });
                         this.setState({vision:abt.vision_statement});  
+                        this.setState({institute:abt});
                         console.log("Response object is: ", abt);
-                       // console.log(this.state.institute);
+                       console.log(this.state.institute);
           })
         }
 
@@ -69,7 +70,7 @@ class NHCardHeaderAndFooter extends Component {
             <CardItem>
               <Body>
                 <Text>
-                  {this.state.vision_statement}
+                  {this.state.vision}
                 </Text>
               </Body>
             </CardItem>
@@ -83,6 +84,25 @@ class NHCardHeaderAndFooter extends Component {
               <Body>
                 <Text>
                   {this.state.history}
+                </Text>
+              </Body>
+            </CardItem>
+            
+          </Card>
+          <Card style={styles.mb}>
+            <CardItem header>
+              <Text>Contact</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>
+                  Phone :{this.state.institute.contact_number}
+                </Text>
+                <Text>
+                  Email :{this.state.institute.email}
+                </Text>
+                <Text>
+                  Address :{this.state.institute.address}
                 </Text>
               </Body>
             </CardItem>

@@ -16,12 +16,42 @@ import {
   Body
 } from "native-base";
 import styles from "./styles";
+import fetchurl from "../../login/fetchurl";
+import {AsyncStorage} from 'react-native';
 
 const deviceWidth = Dimensions.get("window").width;
 const logo = require("../../../assets/logo.png");
 const cardImage = require("../../../assets/drawer-cover.png");
 
 class NHCardShowcase extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      activities:[],
+      titles:[],
+      seg: 2
+    };
+  };
+
+  componentDidMount=()=> {this._loadInitialState().done();}
+
+  _loadInitialState = async () => {   
+    var value= await AsyncStorage.getItem("auth_token");
+    console.log(value);
+    fetch(fetchurl.CLIENT_API+'/api/self/view?ctx=eca', {method: 'GET',headers: {'auth_token':value } 
+    })
+    .then((res)=>{return res.json();})
+    .then((abt)=>{
+                  this.setState({ activities:abt });
+                   
+                  console.log("Response object is: ", abt);
+                 console.log(this.state.activities);
+    })
+  }
+
+
+
   render() {
     return (
       <Container style={styles.container}>
@@ -32,15 +62,18 @@ class NHCardShowcase extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>Card Showcase</Title>
+            <Title>School Activities</Title>
           </Body>
           <Right />
         </Header>
 
         <Content padder>
-          <Card style={styles.mb}>
+        {this.state.activities.map( activity => (
+          <Card style={styles.mb} key={activity.id}>
             
-            
+            <CardItem header>
+              <Text>{activity.name}</Text>
+            </CardItem>
 
             <CardItem>
               <Body>
@@ -55,46 +88,16 @@ class NHCardShowcase extends Component {
                   source={cardImage}
                 />
                 <Text>
-                  NativeBase is a free and source framework that enable
-                  developers to build high-quality mobile apps using React
-                  Native iOS and Android apps with a fusion of ES6. NativeBase
-                  builds a layer on top of React Native that provides you with
-                  basic set of components for mobile application development.
+                 {activity.description}
                 </Text>
               </Body>
             </CardItem>
             
           </Card>
+        ))}
 
 
-
-          <Card style={styles.mb}>
-            
-            
-
-            <CardItem>
-              <Body>
-                <Image
-                  style={{
-                    alignSelf: "center",
-                    height: 150,
-                    resizeMode: "cover",
-                    width: deviceWidth / 1.18,
-                    marginVertical: 5
-                  }}
-                  source={cardImage}
-                />
-                <Text>
-                  NativeBase is a free and source framework that enable
-                  developers to build high-quality mobile apps using React
-                  Native iOS and Android apps with a fusion of ES6. NativeBase
-                  builds a layer on top of React Native that provides you with
-                  basic set of components for mobile application development.
-                </Text>
-              </Body>
-            </CardItem>
-            
-          </Card>
+             
 
         </Content>
       </Container>

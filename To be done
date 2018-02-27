@@ -8,10 +8,9 @@ https://developer.pushbots.com/api/v2/#/Devices/pushBatch
 
 To Send SendSMS
 
-http://37.48.104.204/api/mt/SendSMS?user=schooltest&amp;password=9160708
-764&amp;senderid=AMEENB&amp;channel=Trans&amp;DCS=0&amp;flashsms=0&amp;number=91989xxxxx
-xx&amp;text=test message&amp;route=1
+http://37.48.104.204/api/mt/SendSMS?user=schooltest&amp;password=9160708764&amp;senderid=AMEENB&amp;channel=Trans&amp;DCS=0&amp;flashsms=0&amp;number=918433980631&amp;text=hello&amp;route=1
 
+http://37.48.104.204/api/mt/SendSMS?user=schooltest&password=9160708764&senderid=AMEENB&channel=Trans&DCS=0&flashsms=0&number=918433980631,919553552777&text=test%20messagess&route=1
 
 1. Fee tab , 
     We need 1.Total Fee
@@ -29,3 +28,6 @@ xx&amp;text=test message&amp;route=1
 3. All books of particular class: /api/books/view?ctx=class&val={{CLASSID}}
 4. Timetable of particular class: /api/timetable/view?ctx=class&val={{CLASSID}}
 /api/fees/view?ctx=student&val={{STUDENT_ID}}&dateStart={{10-01-2018}}&dateEnd={{22-01-2018}}
+
+
+/api/calss/view?ctx=id&val=

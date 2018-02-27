@@ -46,7 +46,7 @@ class NHListThumbnail extends Component {
 _loadInitialState = async () => {   
 var value= await AsyncStorage.getItem("auth_token");
 console.log(value);
-fetch('http://'+fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {  
+fetch(fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {  
     method: 'GET',
     headers: {
             'Accept': 'application/json',
@@ -57,21 +57,12 @@ fetch('http://'+fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {
         }
       })
       .then((res)=>{
-        console.log("Is OK? ", res.ok);
-        console.log("Status Code: ", res.status);
         return res.json();      // or `res.text();` 
       })
       .then((obj)=>{
                     this.setState({ staffs:obj.payload });  
                     console.log("Response object is: ", obj);
-                    //console.log(obj.payload.name);
-                    //var content=obj.payload;
-                   // let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-                   // this.setState({
-                   //   dataSource: obj.payload
-                   //   });
-                    //console.log(this.state.dataSource);
-
+                   
       })
       .catch((error) => {
         console.error(error);})
