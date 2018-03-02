@@ -16,7 +16,10 @@ import {
   Text,
   ActivityIndicator
 } from "native-base";
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage,ImageBackground} from 'react-native';
+
+
+const background = require("../../assets/background.png");
 import styles from "./flstyles";
 //import fetch from "fetch";
 //import { MKTextField, MKColor, MKButton } from 'react-native-material-kit';
@@ -117,6 +120,7 @@ class Login extends Component {
                 </Body>
                 <Right />
               </Header>
+              <ImageBackground source={background} style={styles.imageContainer}>
 
               <Content justifyContent='center'>
                 <Form>
@@ -157,6 +161,7 @@ class Login extends Component {
                   <Text>Sign In</Text>
                 </Button>
               </Content>
+              </ImageBackground>
             </Container>
           );
         }

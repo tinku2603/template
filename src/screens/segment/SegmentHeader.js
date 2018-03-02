@@ -18,8 +18,9 @@ import {
 } from "native-base";
 import styles from "./styles";
 import fetchurl from "../../login/fetchurl";
-import {AsyncStorage,Alert} from 'react-native';
+import {AsyncStorage,Alert,ImageBackground} from 'react-native';
 
+const background = require("../../../assets/background.png");
 
 class SegmentNB extends Component {
   constructor(props) {
@@ -51,30 +52,7 @@ class SegmentNB extends Component {
           console.log(value);
           console.log(username);
       
-          /*
-          fetch('http://'+fetchurl.CLIENT_API+'/api/students/view?ctx=student&username=abc1', { method: 'GET',headers: {'auth_token':value} })
-          .then((res)=>{return res.json();})
-          .then((obj)=>{
-                        this.setState({students:obj });
-                        this.setState({id:obj.id});  
-                      // console.log(this.state.students);
-                        console.log("Response object is: ", obj);
-                       // console.log(this.state.students.id);
-                       // console.log('id:',this.state.id);
-          })
-          //var url = 'http://'+fetchurl.CLIENT_API+'/api/fees/view?ctx=student&val='+this.state.students.id+'&dateStart=01-01-2018&dateEnd=25-02-2018';
-          //console.log(url);
-          //const id={this.state.students.id};
-          console.log(this.state.id);
-          fetch('http://'+fetchurl.CLIENT_API+'/api/fees/view?ctx=student&val=${id}&dateStart=01-01-2018&dateEnd=25-02-2018', { method: 'GET',headers: {'auth_token':value} })
-          .then((res)=>{return res.json();})
-          .then((obj)=>{
-                    console.log(this.state.students.id);
-                        this.setState({fees:obj });  
-                        console.log("Response object is: ", obj);
-          })
-
-          */
+      
           const students= await fetch(fetchurl.CLIENT_API+'/api/students/view?ctx=student&username='+username, { method: 'GET',headers: {'auth_token':value} });
           const student= await students.json();
           console.log(student);
@@ -93,6 +71,7 @@ class SegmentNB extends Component {
   render() {
     return (
       <Container>
+        <ImageBackground source={background} style={styles.imageContainer}>
         <Header hasTabs>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
@@ -108,6 +87,7 @@ class SegmentNB extends Component {
             </Button>
           </Right>
         </Header>
+        
         <Segment>
           <Button
             first
@@ -219,6 +199,7 @@ class SegmentNB extends Component {
 
       }
         </Content>
+        </ImageBackground>
       </Container>
     );
   }

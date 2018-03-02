@@ -31,3 +31,14 @@ http://37.48.104.204/api/mt/SendSMS?user=schooltest&password=9160708764&senderid
 
 
 /api/calss/view?ctx=id&val=
+
+
+
+
+
+App prerequisites:
+Posters 512X512,1024X500
+logo 144x144,96X96,48X48,72X72
+
+Principal photos (Staff) 240X240
+Normal poster with 

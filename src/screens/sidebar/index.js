@@ -34,7 +34,7 @@ const datas = [
     name: "Student Information",
     //route: "Header",
     route:"BasicSegment",
-    icon: "phone-portrait",
+    icon: "help-buoy",
     bg: "#477EEA"
     //types: "8"
   },
@@ -42,14 +42,14 @@ const datas = [
     name: "Class Information",
     //route: "Header",
     route:"AdvSegment",
-    icon: "phone-portrait",
+    icon: "help-buoy",
     bg: "#477EEA"
     //types: "8"
   },
   {
     name: "Results",
     route: "NHListSeparator",
-    icon: "phone-portrait",
+    icon: "grid",
     bg: "#DA4437"
     //types: "4"
   },
@@ -57,21 +57,21 @@ const datas = [
     name: "School Activities",
     //route: "NHBadge",
     route: "NHCardShowcase",
-    icon: "notifications",
+    icon: "image",
     bg: "#4DCAE0"
   },
   {
     name: "Academic Calendar",
     //route: "NHButton",
     route:"NHListHeader",
-    icon: "radio-button-off",
+    icon: "keypad",
     bg: "#1EBC7C"
     //types: "9"
   },
   {
     name: "Notices",
     route: "BasicCard",
-    icon: "keypad",
+    icon: "notifications",
     bg: "#B89EF5"
     //types: "5"
   }

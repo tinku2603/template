@@ -17,7 +17,9 @@ import {
 } from "native-base";
 import styles from "./styles";
 import fetchurl from "../../login/fetchurl";
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage,ImageBackground} from 'react-native';
+const background = require("../../../assets/background.png");
+import variable from "../../theme/variables/platform";
 
 const deviceWidth = Dimensions.get("window").width;
 const logo = require("../../../assets/logo.png");
@@ -55,7 +57,8 @@ class NHCardShowcase extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Header>
+      <ImageBackground source={background} style={styles.imageContainer}>
+        <Header style={styles.header}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon name="arrow-back" />
@@ -100,6 +103,7 @@ class NHCardShowcase extends Component {
              
 
         </Content>
+        </ImageBackground>
       </Container>
     );
   }

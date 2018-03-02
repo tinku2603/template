@@ -15,10 +15,12 @@ import {
   List,
   ListItem
 } from "native-base";
+import styles from "./styles";
 import fetchurl from "../../login/fetchurl";
-import {AsyncStorage,Alert} from 'react-native';
+import {AsyncStorage,Alert,ImageBackground} from 'react-native';
 const Item = Picker.Item;
 
+const background = require("../../../assets/background.png");
 class SegmentNB extends Component {
 
   constructor(props) {
@@ -72,6 +74,7 @@ class SegmentNB extends Component {
   render() {
     return (
       <Container>
+        <ImageBackground source={background} style={styles.imageContainer}>
         <Header hasTabs>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
@@ -148,6 +151,7 @@ class SegmentNB extends Component {
       }
          
         </Content>
+        </ImageBackground>
       </Container>
     );
   }

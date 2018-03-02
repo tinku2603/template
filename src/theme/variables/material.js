@@ -130,9 +130,9 @@ export default {
   tabBarActiveTextColor: "#fff",
   tabActiveBgColor: "#3F51B5",
 
-  // Header
+  // Header brown:FFB266, blue:3F51B5,ios F8F8F8
   toolbarBtnColor: "#fff",
-  toolbarDefaultBg: platform === "ios" ? "#F8F8F8" : "#3F51B5",
+  toolbarDefaultBg: platform === "ios" ? "#FFB266" : "#FFB266",
   toolbarHeight: platform === "ios" ? (isIphoneX ? 88 : 64) : 56,
   toolbarIconSize: platform === "ios" ? 20 : 22,
   toolbarSearchIconSize: platform === "ios" ? 20 : 23,

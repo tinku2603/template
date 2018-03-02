@@ -15,10 +15,10 @@ import {
 } from "native-base";
 import styles from "./styles";
 import fetchurl from "../../login/fetchurl";
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage,ImageBackground} from 'react-native';
 
 
-
+const background = require("../../../assets/background.png");
 class Basic extends Component {
 
   constructor(props) {
@@ -48,6 +48,7 @@ class Basic extends Component {
   render() {
     return (
       <Container style={styles.container}>
+      <ImageBackground source={background} style={styles.imageContainer}>
         <Header>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
@@ -76,6 +77,7 @@ class Basic extends Component {
           </Card>
        ))}
         </Content>
+        </ImageBackground>
       </Container>
     );
   }

@@ -17,14 +17,14 @@ import {
 import styles from "./styles";
 import { ActivityIndicator} from 'react-native';
 import fetchurl from "../../login/fetchurl";
-import {AsyncStorage,Alert} from 'react-native';
-
+import {AsyncStorage,ImageBackground} from 'react-native';
+const background = require("../../../assets/background.png");
 const sankhadeep = require("../../../assets/contacts/supriya.png");
 const supriya = require("../../../assets/contacts/supriya.png");
 const himanshu = require("../../../assets/contacts/himanshu.png");
 const shweta = require("../../../assets/contacts/shweta.png");
 const shruti = require("../../../assets/contacts/shruti.png");
-const shivraj = require("../../../assets/contacts/shivraj.jpg");
+const principal = require("../../../assets/contacts/principal.png");
 
 class NHListThumbnail extends Component {
   constructor(props){
@@ -74,6 +74,7 @@ fetch(fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {
   render() {
     return (
       <Container style={styles.container}>
+      
         <Header>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
@@ -85,13 +86,13 @@ fetch(fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {
           </Body>
           <Right />
         </Header>
-
+        
         <Content>
           <List>
              { this.state.staffs.map(staff =>(
               <ListItem thumbnail key={staff.id} >
                 <Left>
-                <Thumbnail square size={55} />
+                  <Thumbnail square size={55} source={principal} />
                 </Left>
                 <Body >
                   <Text >
@@ -108,6 +109,7 @@ fetch(fetchurl.CLIENT_API+'/api/staff/view?ctx=all', {
               ) )}
           </List>
         </Content>
+        
       </Container>
     )
   }

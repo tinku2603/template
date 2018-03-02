@@ -8,5 +8,12 @@ export default {
   },
   mb: {
     marginBottom: 15
+  },imageContainer: {
+    flex: 1,
+    width: null,
+    height: null
+  },
+  header:{
+    backgroundColor:"#CC6600"
   }
 };

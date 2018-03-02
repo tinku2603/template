@@ -14,11 +14,14 @@ import {
   Body
 } from "native-base";
 import styles from "./styles";
+import {AsyncStorage,ImageBackground} from 'react-native';
+const background = require("../../../assets/background.png");
 
 class NHCardList extends Component {
   render() {
     return (
       <Container style={styles.container}>
+      <ImageBackground source={background} style={styles.imageContainer}>
         <Header>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
@@ -104,6 +107,7 @@ class NHCardList extends Component {
             </CardItem>
           </Card>
         </Content>
+        </ImageBackground>
       </Container>
     );
   }
