@@ -41,16 +41,23 @@ export default class Main extends Component {
               const time= new Date();
               console.log(time);
               console.log(this.state.curTime);  
-              var value= await AsyncStorage.getItem("auth_token");
+              var token= await AsyncStorage.getItem("auth_token");
               var username=await AsyncStorage.getItem("username");
               const expiry=await AsyncStorage.getItem("expiry");
               console.log(username);
-              console.log(expiry)
-              this.setState({auth_token:value});
+              console.log(expiry);
+              var exp=new Date(expiry);
+              console.log(exp);
+              this.setState({auth_token:token});
               console.log(this.state.auth_token);
+              console.log(Date(expiry));
+              if (exp> time)
+                console.log("greater");
+              else
+                console.log("lesser");
               //AsyncStorage.getItem("expiry").then((value) => this.setState({ "expiry":value}));
-             // console.log("mounted");
-             if(expiry-time!=0) this.setState({isLoggedIn:true});
+             console.log("mounted");
+             if(exp > time && token!=null) this.setState({isLoggedIn:true});
 
             }
 

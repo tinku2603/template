@@ -159,7 +159,7 @@ class SegmentNB extends Component {
           <List>
            <ListItem>
            <Text >
-                <H1> Total Fee : {this.state.classinfo.fee}</H1>
+                 Total Fee : {this.state.classinfo.fee}
                 </Text>
             </ListItem>
             

@@ -49,6 +49,7 @@ const datas = [
   {
     name: "Results",
     route: "NHListSeparator",
+    //route:"Telugu",
     icon: "grid",
     bg: "#DA4437"
     //types: "4"

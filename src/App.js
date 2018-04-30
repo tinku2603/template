@@ -77,6 +77,14 @@ import AdvSegment from "./screens/segment/segmentTab";
 import SimpleDeck from "./screens/deckswiper/simple";
 import AdvancedDeck from "./screens/deckswiper/advanced";
 
+import Telugu from "./screens/list/telugu";
+import Hindi from "./screens/list/hindi";
+import English from "./screens/list/english";
+import Maths from "./screens/list/maths";
+import Science from "./screens/list/science";
+import Social from "./screens/list/social";
+
+
 import Home from "./screens/home/";
 import Anatomy from "./screens/anatomy/";
 import Footer from "./screens/footer/";
@@ -210,6 +218,13 @@ const AppNavigator = StackNavigator(
     NHBasicList: { screen: NHBasicList },
     NHListDivider: { screen: NHListDivider },
     NHListSeparator: { screen: NHListSeparator },
+    Telugu:{screen:Telugu},
+    Hindi:{screen:Hindi},
+    English:{screen:English},
+    Maths:{screen:Maths},
+    Science:{screen:Science},
+    Social:{screen:Social},
+
     NHListHeader: { screen: NHListHeader },
     NHListIcon: { screen: NHListIcon },
     NHListAvatar: { screen: NHListAvatar },
