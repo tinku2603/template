@@ -1,13 +1,13 @@
 import React ,{Component} from "react";
 //import Main from "./src/App";
 import Main from "./src/login/index"
-import Pushbots from 'pushbots-react-native'
+//import Pushbots from 'pushbots-react-native'
 
-Pushbots.registerForRemoteNotifications()
+//Pushbots.registerForRemoteNotifications()
 
 //events work with iOS only in this version. 
 export default class App extends Component{
-	componentWillMount() {
+	/*componentWillMount() {
 		console.log("Adding listener");
 		Pushbots.addEventListener('received', this.onReceived);
 	}
@@ -16,7 +16,8 @@ export default class App extends Component{
 	}
 	onReceived(notification) {
 		Alert.alert( 'Alert Title', JSON.stringify(notification), [ {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')}, {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'}, {text: 'OK', onPress: () => console.log('OK Pressed')}, ], { cancelable: false } )
-  }
+	}
+	*/
   render() {
     return <Main />;
   }

@@ -23,6 +23,7 @@ import App from "../App"
 import getTheme from "../theme/components";
 import variables from "../theme/variables/commonColor";
 import { StyleProvider } from "native-base";
+import firebase from 'react-native-firebase';
 
 
 export default class Main extends Component {
@@ -36,7 +37,11 @@ export default class Main extends Component {
 
             _loadInitialState = async () => { 
              
+              
+             // let key = await firebase.messaging().getToken();
+             //console.log(key);
             
+          
               const Timestamp = require('react-timestamp');
               const time= new Date();
               console.log(time);

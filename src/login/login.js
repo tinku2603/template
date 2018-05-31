@@ -18,7 +18,7 @@ import {
 } from "native-base";
 import {AsyncStorage,ImageBackground} from 'react-native';
 
-
+import firebase from 'react-native-firebase';
 const background = require("../../assets/background.png");
 import styles from "./flstyles";
 //import fetch from "fetch";
@@ -67,19 +67,47 @@ class Login extends Component {
  //   AsyncStorage.getItem("auth_token").then((value) => this.setState({ "auth_token":value}));
  //   console.log("mounted");
  // }
+
+ componentDidMount=()=> {
+               
+  this._loadInitialState().done();
+
+}
+
+_loadInitialState = async () => { 
+
+
+let key = await firebase.messaging().getToken();
+console.log(key);
+}
         userLogin= async() => {
                    //const { username, password } = this.state;
                     this.setState({message: '', isLogginIn: true,token:null});
                     var proceed = null;
+                    var JsonObj={}
                     
+                    JsonObj["username"]=this.state.username;
+                    console.log(JsonObj);
+                    
+                    JsonObj["plain_text_password"]=this.state.password;
+                    console.log(JsonObj);
+                    console.log(this.state.username);
+                    console.log(this.state.password);
+
                   const login=await  fetch(fetchurl.CLIENT_API, {  
                         method: 'POST',
-                        headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                        body: JSON.stringify({username: this.state.username,plain_text_password: this.state.password,})
+                        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                          username: this.state.username,
+                          plain_text_password: this.state.password,
+                          //key:key
+                      })
                       })
                       .then((res) =>{
                           if(res.ok) {this.props.onLoginPress();};
-                          return res.json();      // or `res.text();` 
+                          console.log(res.text());
+                          return res.json(); 
+                               // or `res.text();` 
                           })
                           .then((obj)=>{
                                         console.log("Response object is: ", obj);
